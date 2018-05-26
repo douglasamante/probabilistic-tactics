@@ -1,7 +1,7 @@
 ProbabilisticTactics
 
 The fundamental process of this system is the connection between objects, so any change of attributes or methods can be
-cruising during compilation
+cruising during compilation.
 
 Escalation:
 
@@ -16,6 +16,7 @@ The same ones have the same intention, were created to assist the relation betwe
 Contact Us |
 
 In the class were declared four methods: bestChoicePlayer, that needs the name and the number of the shirt of the chosen player passed like parameter.
+
 The method SelectionTactic, has an important behavior in our code, the same is the heart of the program. In the same that provides the division
 of each problem for its solution, this is all based on a parameter received from type int, which has the role of indicating the team who will play against BITBUCKET.
 
