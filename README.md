@@ -47,8 +47,6 @@ ST - Forward
 As our squad has 40 players, the choice for the 11 players will be based on the analysis of the team that will face BITBUCKET.
 The players chosen by the positions will always be saved in the respective variables that represent each position of the team.
 
-Player [i] .getPosition --------------
-                                  | -----------------> biggerPositionX
                                   
  We considered some important factors for a player to be physically fit to play, all the attributes that were
  used for this analysis, are presented in the Players class, defined as attributes.
