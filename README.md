@@ -27,10 +27,8 @@ determine how a team behaves in their games. That is, the same is describing the
 
 Generation Patters:
 
-Certainly, the class generation patters is the most complex with respect to calculations. It receives as parameter the number of players that each position will have, the positions are represented as:
+Certainly, the class generation patters is the most complex with respect to calculations. It receives as parameter the number of players that each position will have, the positions are represented as: GK - Goalkeeper, DC - Defender, RB - Right side, LB - Left back, CDM - Steering Wheel, CAM - Stocking, LW - Left Tip, 	RW - Right Tip, ST - Forward.
 
-GK - Goalkeeper, DC - Defender, RB - Right side, LB - Left back, CDM - Steering Wheel, CAM - Stocking, LW - Left Tip, 	RW - Right Tip, ST - Forward.
-        
 As our squad has 40 players, the choice for the 11 players will be based on the analysis of the team that will face BITBUCKET. The players chosen by the positions will always be saved in the respective variables that represent each position of the team.
                        
 We considered some important factors for a player to be physically fit to play, all the attributes that were used for this analysis, are presented in the Players class, defined as attributes.
