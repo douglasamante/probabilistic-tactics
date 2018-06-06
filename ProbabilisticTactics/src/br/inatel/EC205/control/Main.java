@@ -258,6 +258,8 @@ public class Main {
         escalation.teams[13].insertion("Payol",gs13 , gf13, ca13, cv13, v13, d13, e13);
         escalation.teams[14].insertion("Mowqilio",gs14 , gf14, ca14, cv14, v14, d14, e14);
         escalation.teams[15].insertion("Bakapowho",gs15 , gf15, ca15, cv15, v15, d15, e15);
+        
+        sst.addGame();
     }
     
 }
