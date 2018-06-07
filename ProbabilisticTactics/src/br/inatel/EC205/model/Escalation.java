@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.inatel.EC205.model;
 
 /**
  *
- * @author casasbahia
+ * @author amantedouglas
  */
 public class Escalation {
     
@@ -27,33 +22,55 @@ public class Escalation {
     public String []escalationOficialName = new String[16];
     public int []escalationOficialNumberShirt = new int[16];
     public Players []  player = new Players[39];
-    public Teams []teams = new Teams[16];
+    public Teams []teams = new Teams[16]; 
     public GeneratePatterns generatePatterns;
     
+    public void  Escalation(){
+        int i;
+        for(i=0;i<escalationOficialName.length;i++){
+            escalationOficialName[i] = new String();
+        }
+         
+    }
+
+    public String[] getEscalationOficialName() {
+        return escalationOficialName;
+    }
+
+    public void setEscalationOficialName(String[] escalationOficialName) {
+        this.escalationOficialName = escalationOficialName;
+    }
     
+    
+    
+    public void setGeneratePatterns(GeneratePatterns generatepatterns){
+        this.generatePatterns = generatepatterns;
+    }
     
           
     
-    void bestChoicePlayer(String name, int numberShirt){ // Choice the best escalation for match
+    public void bestChoicePlayer(String name){ // Choice the best escalation for match
         
-        int i=0;
+        int i;
+        
+        for(i=0; i<escalationOficialName.length; i++){
+            escalationOficialName[i] = new String();
+        }
         
         if(escalationOficialName[i].equalsIgnoreCase("null")){ //any element on the position
             escalationOficialName[i] = name;
-            escalationOficialNumberShirt[i] = numberShirt;
         }
         else{
             while(!(escalationOficialName[i].equalsIgnoreCase("null"))){
                 i = i+1;  
             }
             escalationOficialName[i] = name;
-            escalationOficialNumberShirt[i] = numberShirt;
         }
     }
     
-    void SelectionTactic(int teamAux){
-        int j;
+    public void SelectionTactic(int teamAux){
         
+        int j;
         int i; 
         double goalByGameDone;
         double goalByGameTaken;
@@ -105,11 +122,11 @@ public class Escalation {
         if(teamAux==15){
             team = "Kalakazi";
         }
-       
-        System.out.printf(" %s ", teams[0].getNames());
+        
+        
         
         for(i=0;i<teams.length;i++){
-
+            
             if(teams[i].getNames().equalsIgnoreCase(team)){
                 int goalsScored = teams[i].getGoalsScored();
                 int goalsConceded = teams[i].getGoalsConceded();
@@ -120,7 +137,7 @@ public class Escalation {
                 int totalGameForMath;
                 double ProbabilityConsideration;
                 int relevation = 0;
-
+                
                 //Probability of the team do goal or taken
                 goalByGameDone = goalsScored/game;
                 goalByGameTaken = goalsConceded/game;
@@ -145,15 +162,18 @@ public class Escalation {
 
                 else{
                     //Victories or defealts *All or nothing
-                    relevation = 3;
+                    relevation = 2;
                 }
-
-                if((goalByGameDone>=2)&&((relevation==3)||relevation==2)) //I have play with more defensores
+                
+                if((goalByGameDone>=1)&&(relevation==2)) //I have play with more defensores
                 {
+                    
+                
                     name = "4-5-1";
                     function = "Warm Game";
                     generatePatterns.Choose(1,2,1,1,3,0,1,1,1);
-                    if((goalByGameTaken>=2)&&((relevation==2)||(relevation==3))){
+                    
+                    if(goalByGameTaken>=1){
                         name = "5-3-2";
                         function = "Total defense";
                         generatePatterns.Choose(1, 3, 1, 1, 2, 1, 0, 0, 2);
@@ -162,7 +182,7 @@ public class Escalation {
                 else{
                     name = "4-4-2";
                     function = "Normal";
-                    generatePatterns.Choose(1, 2, 1, 1, 2, 2, 0, 0, 2);
+                    generatePatterns.Choose(1,2,1,1,2,2,0,0,2);
                     if(goalByGameTaken>=2){
                         name = "3-4-3";
                         function = "Total atack";
@@ -170,7 +190,7 @@ public class Escalation {
                     }
                 }
                 }
-
+                
             }   
 
         }
@@ -183,5 +203,5 @@ public class Escalation {
     void delete(){
         
     }
-
+    
 }
