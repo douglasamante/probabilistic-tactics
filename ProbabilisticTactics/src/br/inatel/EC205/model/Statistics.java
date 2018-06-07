@@ -1,15 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.inatel.EC205.model;
 
 import java.util.Scanner;
 
 /**
  *
- * @author casasbahia
+ * @author amantedouglas
  */
 public class Statistics{
 
@@ -19,11 +15,16 @@ public class Statistics{
     private int  yellowCard;
     private int  redCard;
     public Escalation escalation ;
+    public Teams [] teams = new Teams[16];
     
     public Statistics(){
         escalation = new Escalation();
+        
     }
     
+    public void setTeams(Teams [] teams){
+        this.teams = teams;
+    }
     
     
     public void setYellowCard(int YellowCard){
@@ -44,6 +45,11 @@ public class Statistics{
 
     public void descritionPlayer(){ //descrition the player
 
+    }
+    
+    public void setEscalation(Escalation escalation){
+        this.escalation = escalation;
+        
     }
 
     public void addGame(){
@@ -88,28 +94,18 @@ public class Statistics{
         
         int i;
         
-        for(i=0;i<escalation.escalationOficialName.length;i++){
+        
+        /*for(i=0;i<escalation.escalationOficialName.length;i++){
             
-            while(!(escalation.escalationOficialName[i].equalsIgnoreCase("null"))){
+            while(!(escalation.escalationOficialName[i].equalsIgnoreCase("vazio"))){
                 System.out.printf(" %s ",escalation.name);
                 System.out.printf(" ");
                 System.out.printf(" %s - %d", escalation.escalationOficialName[i],escalation.escalationOficialNumberShirt[i]);
                 
             }
             
-        }
+        }*/
         
-    }
-        
-            
-        
-            
-    
-            
-    
-
-    public void deleteGame(){
-            //Opcion for delete a game of the math
     }
     
 }
