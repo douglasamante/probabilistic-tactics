@@ -1,34 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.inatel.EC205.control;
 
+/**
+ *
+ * @author amantedouglas
+ */
+
 import br.inatel.EC205.model.Escalation;
+import br.inatel.EC205.model.GeneratePatterns;
 import br.inatel.EC205.model.Teams;
 import br.inatel.EC205.model.Statistics;
 import br.inatel.EC205.model.Players;
 import java.util.Random;
 import java.util.Scanner;
 
-/**
- *
- * @author casasbahia
- */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+       
         Players []player = new Players[40];
-        
         Escalation escalation = new Escalation();
-        Teams []team = new Teams[16]; 
+        Teams []teams = new Teams[16]; 
         Random random = new Random(); //number of random [0 - 20]
-     
         Statistics sst = new Statistics();
+        GeneratePatterns gp = new GeneratePatterns();
         
         Scanner valueT = new Scanner(System.in);
     
@@ -36,16 +30,12 @@ public class Main {
         
         for(i=0;i<40;i++){
             player[i] = new Players();
-            // O ERRO QUE ESTAVA DANDO AQUI, FALTA POR A VARIAVEL "STATISTICS COMO PUBLIC NA CLASSE PLAYER",
-            // se não vc não consegue acessa-la o/
             player[i].statistics = sst;
         }
         
         for(i=0;i<16;i++){
-            team[i] = new Teams();
-            // O ERRO QUE ESTAVA DANDO AQUI, FALTA POR A VARIAVEL "TEAMS COMO PUBLIC NA CLASSE ESCALATION",
-            // se não vc não consegue acessa-la o/
-            escalation.teams[i] = team[i];
+            teams[i] = new Teams();
+            escalation.teams[i] = teams[i];            
         }
         
         
@@ -259,7 +249,17 @@ public class Main {
         escalation.teams[14].insertion("Mowqilio",gs14 , gf14, ca14, cv14, v14, d14, e14);
         escalation.teams[15].insertion("Bakapowho",gs15 , gf15, ca15, cv15, v15, d15, e15);
         
+        sst.setEscalation(escalation);
+        escalation.setGeneratePatterns(gp);
+        gp.setPlayer(player);
+        gp.setEscalation(escalation);
+        sst.setTeams(teams);
+        
+        
+        
         sst.addGame();
     }
+    
+    
     
 }
