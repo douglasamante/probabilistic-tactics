@@ -1,19 +1,21 @@
 package br.inatel.EC205.model;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author casasbahia
+ * @author amantedouglas
  */
 public class GeneratePatterns { 
     
-    Players [] player;
+    Players [] player = new Players[39];
     Escalation escalation;
+    
+    public void setPlayer(Players player[]){
+        this.player = player;
+    }
+    
+    public void setEscalation(Escalation escalation){
+        this.escalation = escalation;
+    }
     
     public void Choose(int GK, int DC, int RB, int LB, int CDM, int CAM, int RW, int LW, int ST){
         
@@ -75,7 +77,9 @@ public class GeneratePatterns {
         int chosenShirtNumberST1 = 0;
         int chosenShirtNumberST2 = 0;
         
+        
         for (i = 0; i < player.length; i++) {
+            
             if(player[i].getPosition().equalsIgnoreCase("GK")){
                 IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
                 sum = (player[i].getPositioning()+player[i].getImpulse()+player[i].getForce());
@@ -85,9 +89,10 @@ public class GeneratePatterns {
                         chosenNameGK = player[i].getName(); 
                         chosenShitNumberGK = player[i].getShirtNumber();
                     }
-                }
-                
+                }   
             }
+            
+            
             if(player[i].getPosition().equalsIgnoreCase("DC")){
                 sum=0;
                 IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
@@ -232,68 +237,81 @@ public class GeneratePatterns {
             }
         }
         
+        
         if((GK==1)&&(DC==2)&&(RB==1)&&(LB==1)&&(CDM==2)&&(CAM==2)&&(ST==2)){ //4-4-2
             
             
-            escalation.bestChoicePlayer(chosenNameGK,chosenShitNumberGK);
-            escalation.bestChoicePlayer(chosenNameDC1,chosenShirtNumberDC1);
-            escalation.bestChoicePlayer(chosenNameDC2,chosenShirtNumberDC2);
-            escalation.bestChoicePlayer(chosenNameRB,chosenShirtNumberRB);
-            escalation.bestChoicePlayer(chosenNameLB,chosenShirtNumberLB);
-            escalation.bestChoicePlayer(chosenNameCDM1,chosenShirtNumberCDM1);
-            escalation.bestChoicePlayer(chosenNameCDM2,chosenShirtNumberCDM2);
-            escalation.bestChoicePlayer(chosenNameCAM1,chosenShirtNumberCAM1);
-            escalation.bestChoicePlayer(chosenNameCAM2,chosenShirtNumberCAM2);
-            escalation.bestChoicePlayer(chosenNameST1,chosenShirtNumberST1);
-            escalation.bestChoicePlayer(chosenNameST2,chosenShirtNumberST2);
+            
+            escalation.bestChoicePlayer(chosenNameGK);
+            escalation.bestChoicePlayer(chosenNameDC1);
+            escalation.bestChoicePlayer(chosenNameDC2);
+            escalation.bestChoicePlayer(chosenNameRB);
+            escalation.bestChoicePlayer(chosenNameLB);
+            escalation.bestChoicePlayer(chosenNameCDM1);
+            escalation.bestChoicePlayer(chosenNameCDM2);
+            escalation.bestChoicePlayer(chosenNameCAM1);
+            escalation.bestChoicePlayer(chosenNameCAM2);
+            escalation.bestChoicePlayer(chosenNameST1);
+            escalation.bestChoicePlayer(chosenNameST2);
         }
         
         else if((GK==1)&&(DC==3)&&(CDM==2)&&(CAM==2)&&(LW==1)&&(RW==1)&&(ST==1)){ //3-4-2
             
-            escalation.bestChoicePlayer(chosenNameGK,chosenShitNumberGK);
-            escalation.bestChoicePlayer(chosenNameDC1,chosenShirtNumberDC1);
-            escalation.bestChoicePlayer(chosenNameDC2,chosenShirtNumberDC2);
-            escalation.bestChoicePlayer(chosenNameDC3,chosenShirtNumberDC3);
-            escalation.bestChoicePlayer(chosenNameCDM1,chosenShirtNumberCDM1);
-            escalation.bestChoicePlayer(chosenNameCDM2,chosenShirtNumberCDM2);
-            escalation.bestChoicePlayer(chosenNameCAM1,chosenShirtNumberCAM1);
-            escalation.bestChoicePlayer(chosenNameCAM2,chosenShirtNumberCAM2);
-            escalation.bestChoicePlayer(chosenNameLW,chosenShirtNumberLW);
-            escalation.bestChoicePlayer(chosenNameRW,chosenShirtNumberRW);
-            escalation.bestChoicePlayer(chosenNameST1,chosenShirtNumberST1);
+            
+            
+            escalation.bestChoicePlayer(chosenNameGK);
+            escalation.bestChoicePlayer(chosenNameDC1);
+            escalation.bestChoicePlayer(chosenNameDC2);
+            escalation.bestChoicePlayer(chosenNameDC3);
+            escalation.bestChoicePlayer(chosenNameCDM1);
+            escalation.bestChoicePlayer(chosenNameCDM2);
+            escalation.bestChoicePlayer(chosenNameCAM1);
+            escalation.bestChoicePlayer(chosenNameCAM2);
+            escalation.bestChoicePlayer(chosenNameLW);
+            escalation.bestChoicePlayer(chosenNameRW);
+            escalation.bestChoicePlayer(chosenNameST1);
             
         }
         
         else if((GK==1)&&(DC==3)&&(RB==1)&&(LB==1)&&(CDM==2)&&(CAM==1)&&(ST==2)){ //5-3-2
             
-            escalation.bestChoicePlayer(chosenNameGK,chosenShitNumberGK);
-            escalation.bestChoicePlayer(chosenNameDC1,chosenShirtNumberDC1);
-            escalation.bestChoicePlayer(chosenNameDC2,chosenShirtNumberDC2);
-            escalation.bestChoicePlayer(chosenNameDC3,chosenShirtNumberDC3);
-            escalation.bestChoicePlayer(chosenNameRB,chosenShirtNumberRB);
-            escalation.bestChoicePlayer(chosenNameLB,chosenShirtNumberLB);
-            escalation.bestChoicePlayer(chosenNameCDM1,chosenShirtNumberCDM1);
-            escalation.bestChoicePlayer(chosenNameCDM2,chosenShirtNumberCDM2);
-            escalation.bestChoicePlayer(chosenNameCAM1,chosenShirtNumberCAM1);
-            escalation.bestChoicePlayer(chosenNameST1,chosenShirtNumberST1);
-            escalation.bestChoicePlayer(chosenNameST2,chosenShirtNumberST2);
+            
+            
+            escalation.bestChoicePlayer(chosenNameGK);
+            escalation.bestChoicePlayer(chosenNameDC1);
+            escalation.bestChoicePlayer(chosenNameDC2);
+            escalation.bestChoicePlayer(chosenNameDC3);
+            escalation.bestChoicePlayer(chosenNameRB);
+            escalation.bestChoicePlayer(chosenNameLB);
+            escalation.bestChoicePlayer(chosenNameCDM1);
+            escalation.bestChoicePlayer(chosenNameCDM2);
+            escalation.bestChoicePlayer(chosenNameCAM1);
+            escalation.bestChoicePlayer(chosenNameST1);
+            escalation.bestChoicePlayer(chosenNameST2);
             
         }
         else{ //4-5-1
             
-            escalation.bestChoicePlayer(chosenNameGK,chosenShitNumberGK);
-            escalation.bestChoicePlayer(chosenNameDC1,chosenShirtNumberDC1);
-            escalation.bestChoicePlayer(chosenNameDC2,chosenShirtNumberDC2);
-            escalation.bestChoicePlayer(chosenNameRB,chosenShirtNumberRB);
-            escalation.bestChoicePlayer(chosenNameLB,chosenShirtNumberLB);
-            escalation.bestChoicePlayer(chosenNameCDM1,chosenShirtNumberCDM1);
-            escalation.bestChoicePlayer(chosenNameCDM2,chosenShirtNumberCDM2);
-            escalation.bestChoicePlayer(chosenNameCDM3,chosenShirtNumberCDM3);
-            escalation.bestChoicePlayer(chosenNameLW,chosenShirtNumberLW);
-            escalation.bestChoicePlayer(chosenNameRW,chosenShirtNumberRW);
-            escalation.bestChoicePlayer(chosenNameST1,chosenShirtNumberST1);
+            
+            
+            
+            escalation.bestChoicePlayer(chosenNameGK);
+            escalation.bestChoicePlayer(chosenNameDC1);
+            escalation.bestChoicePlayer(chosenNameDC2);
+            escalation.bestChoicePlayer(chosenNameRB);
+            escalation.bestChoicePlayer(chosenNameLB);
+            escalation.bestChoicePlayer(chosenNameCDM1);
+            escalation.bestChoicePlayer(chosenNameCDM2);
+            escalation.bestChoicePlayer(chosenNameCDM3);
+            escalation.bestChoicePlayer(chosenNameLW);
+            escalation.bestChoicePlayer(chosenNameRW);
+            escalation.bestChoicePlayer(chosenNameST1);
+            
+            
             
         }
+        
+        
       
     }
     
