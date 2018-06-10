@@ -46,7 +46,7 @@ public class Escalation {
         this.generatePatterns = generatepatterns;
     }
     
-          
+         
     
     public void bestChoicePlayer(String name){ // Choice the best escalation for match
         
