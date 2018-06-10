@@ -83,7 +83,7 @@ public class Statistics{
         }
         
         
-        escalation.SelectionTactic(team1);
+        escalation.SelectionTactic(team1, this.teams);
          
         
         

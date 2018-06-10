@@ -30,7 +30,6 @@ public class Escalation {
         for(i=0;i<escalationOficialName.length;i++){
             escalationOficialName[i] = new String();
         }
-         
     }
 
     public String[] getEscalationOficialName() {
@@ -52,30 +51,31 @@ public class Escalation {
     public void bestChoicePlayer(String name){ // Choice the best escalation for match
         
         int i;
-        
+
         for(i=0; i<escalationOficialName.length; i++){
             escalationOficialName[i] = new String();
         }
         
-        if(escalationOficialName[i].equalsIgnoreCase("null")){ //any element on the position
+        /*if(escalationOficialName[i].equalsIgnoreCase("null")){ //any element on the position
             escalationOficialName[i] = name;
         }
-        else{
-            while(!(escalationOficialName[i].equalsIgnoreCase("null"))){
-                i = i+1;  
-            }
-            escalationOficialName[i] = name;
+        else{*/
+        i = 0;
+        while(escalationOficialName[i] == null || escalationOficialName[i].equalsIgnoreCase("null")){
+            i = i+1;  
         }
+        escalationOficialName[i] = name;
+        //}
     }
     
-    public void SelectionTactic(int teamAux){
+    public void SelectionTactic(int teamAux, Teams[] teams){
         
         int j;
         int i; 
         double goalByGameDone;
         double goalByGameTaken;
         int game = 15;
-        String team = null;
+        String team = "";
         
         if(teamAux==1){
             team = "Origin";
