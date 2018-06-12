@@ -43,9 +43,6 @@ public class Statistics{
         return redCard;
     }
 
-    public void descritionPlayer(){ //descrition the player
-
-    }
     
     public void setEscalation(Escalation escalation){
         this.escalation = escalation;
@@ -95,16 +92,16 @@ public class Statistics{
         int i;
         
         
-        /*for(i=0;i<escalation.escalationOficialName.length;i++){
+        for(i=0;i<escalation.escalationOficialName.length;i++){
             
-            while(!(escalation.escalationOficialName[i].equalsIgnoreCase("vazio"))){
+            while(!(escalation.escalationOficialName[i].equalsIgnoreCase("null"))){
                 System.out.printf(" %s ",escalation.name);
                 System.out.printf(" ");
                 System.out.printf(" %s - %d", escalation.escalationOficialName[i],escalation.escalationOficialNumberShirt[i]);
                 
             }
             
-        }*/
+        }
         
     }
     
