@@ -48,7 +48,7 @@ public class Escalation {
     
          
     
-    public void bestChoicePlayer(String name){ // Choice the best escalation for match
+    public void bestChoicePlayer(String name){ // ERRO
         
         int i;
 
@@ -56,16 +56,16 @@ public class Escalation {
             escalationOficialName[i] = new String();
         }
         
-        /*if(escalationOficialName[i].equalsIgnoreCase("null")){ //any element on the position
+        if(escalationOficialName[i].equalsIgnoreCase("null")){ //any element on the position
             escalationOficialName[i] = name;
         }
-        else{*/
+        else{
         i = 0;
         while(escalationOficialName[i] == null || escalationOficialName[i].equalsIgnoreCase("null")){
             i = i+1;  
         }
         escalationOficialName[i] = name;
-        //}
+        }
     }
     
     public void SelectionTactic(int teamAux, Teams[] teams){
@@ -129,6 +129,7 @@ public class Escalation {
             
             if(teams[i].getNames().equalsIgnoreCase(team)){
                 int goalsScored = teams[i].getGoalsScored();
+
                 int goalsConceded = teams[i].getGoalsConceded();
                 int defealts = teams[i].getDefealts();
                 int victories = teams[i].getVictories();
@@ -144,7 +145,8 @@ public class Escalation {
                 numberConsideration = ((victories*0.5)+(draws*0.1)+(defealts*0.4));
                 totalGameForMath = victories+draws+defealts;
                 ProbabilityConsideration = numberConsideration/totalGameForMath;
-
+                
+                
                 //if PROBABILITYCONSIDERATION > 0.2 = LITTLE DRAWS 
 
                 //if PROBABILITYCONSIDERATION > 0.5 = victories or defealts 
@@ -170,21 +172,30 @@ public class Escalation {
                     
                 
                     name = "4-5-1";
+
+                    System.out.printf("%s",this.getName());
                     function = "Warm Game";
                     generatePatterns.Choose(1,2,1,1,3,0,1,1,1);
                     
                     if(goalByGameTaken>=1){
                         name = "5-3-2";
+
+                        System.out.printf("%s",this.getName());
                         function = "Total defense";
                         generatePatterns.Choose(1, 3, 1, 1, 2, 1, 0, 0, 2);
                 }
 
                 else{
+                    
                     name = "4-4-2";
+                    System.out.printf("%s",this.getName());
+                
                     function = "Normal";
                     generatePatterns.Choose(1,2,1,1,2,2,0,0,2);
                     if(goalByGameTaken>=2){
                         name = "3-4-3";
+
+                        System.out.printf("%s",this.getName());
                         function = "Total atack";
                         generatePatterns.Choose(1, 3, 0, 0, 2, 2, 1, 1, 1);
                     }
@@ -194,14 +205,25 @@ public class Escalation {
             }   
 
         }
-    }
-    
-    void edit(){
         
     }
-    
-    void delete(){
-        
+
+    public String getName() {
+        return name;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getFunction() {
+        return function;
+    }
+
+    public void setFunction(String function) {
+        this.function = function;
+    }
+    
+    
     
 }
