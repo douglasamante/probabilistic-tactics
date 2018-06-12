@@ -257,7 +257,19 @@ public class Main {
         
         
         
-        sst.addGame();
+        sst.addGame(); 
+        
+        /*
+        
+        O que deve aparecer em nossas interfaces. 
+            Imprimir, nossos detalhes como gols, vitorias, empates, derrotas em relação a nossa equipe
+            Imprmir, nome, função em relação a formação 
+            Imprimir, padrões gerados como ProbabilityConsideration(classe escalation)
+            Imprimir nossos jogadores cadastrados e suas caracteristicas
+            Imprimir os jogos já realizados e os resultados
+               
+        */
+        
     }
     
     
