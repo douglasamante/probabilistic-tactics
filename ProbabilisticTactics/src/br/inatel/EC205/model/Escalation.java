@@ -1,5 +1,7 @@
 package br.inatel.EC205.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author amantedouglas
@@ -19,27 +21,35 @@ public class Escalation {
     3-4-3  - Total Atack
     */
     
-    public String []escalationOficialName = new String[16];
-    public int []escalationOficialNumberShirt = new int[16];
+    //public String []escalationOficialName = new String[16];
+    public ArrayList<String> escalationOficialName = new ArrayList<>();
+    public ArrayList<Integer> escalationOficialNumberShirt = new ArrayList<>();
     public Players []  player = new Players[39];
     public Teams []teams = new Teams[16]; 
     public GeneratePatterns generatePatterns;
     
     public void  Escalation(){
-        int i;
+        /*int i;
         for(i=0;i<escalationOficialName.length;i++){
             escalationOficialName[i] = new String();
-        }
+        }*/
     }
 
-    public String[] getEscalationOficialName() {
-        return escalationOficialName;
+    public ArrayList<String> getEscalationOficialName() {
+        return this.escalationOficialName;
     }
 
-    public void setEscalationOficialName(String[] escalationOficialName) {
+    public void setEscalationOficialName(ArrayList<String> escalationOficialName) {
         this.escalationOficialName = escalationOficialName;
     }
     
+    public ArrayList<Integer> getEscalationOficialNumberShirt(){
+        return this.escalationOficialNumberShirt;
+    }
+    
+    public void setEscalationOficialNumberShirt(ArrayList<Integer> escalationOficialNumberShirt){
+        this.escalationOficialNumberShirt = escalationOficialNumberShirt;
+    }
     
     
     public void setGeneratePatterns(GeneratePatterns generatepatterns){
@@ -48,24 +58,15 @@ public class Escalation {
     
          
     
-    public void bestChoicePlayer(String name){ // ERRO
-        
-        int i;
+    public void bestChoicePlayer(String name){ // ERRO7
+        /*int i;
 
         for(i=0; i<escalationOficialName.length; i++){
             escalationOficialName[i] = new String();
-        }
+        }*/
         
-        if(escalationOficialName[i].equalsIgnoreCase("null")){ //any element on the position
-            escalationOficialName[i] = name;
-        }
-        else{
-        i = 0;
-        while(escalationOficialName[i] == null || escalationOficialName[i].equalsIgnoreCase("null")){
-            i = i+1;  
-        }
-        escalationOficialName[i] = name;
-        }
+        if(escalationOficialName != null && !escalationOficialName.contains(name))
+                escalationOficialName.add(name);
     }
     
     public void SelectionTactic(int teamAux, Teams[] teams){
