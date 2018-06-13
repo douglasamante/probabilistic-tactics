@@ -1,6 +1,7 @@
 
 package br.inatel.EC205.model;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,9 @@ public class Statistics{
     public String[]  games = new String[20];
     private int  yellowCard;
     private int  redCard;
-    public Escalation escalation ;
+    public Escalation escalation;
+    public ArrayList<String> escalationName = new ArrayList<>();
+    public ArrayList<Integer> escalationNumber = new ArrayList<>();
     public Teams [] teams = new Teams[16];
     
     public Statistics(){
@@ -89,20 +92,20 @@ public class Statistics{
         
         System.out.println("TIME FORMADO "); //RETIRAR
         
-        int i;
+        escalationName = escalation.getEscalationOficialName();
+        escalationNumber = escalation.getEscalationOficialNumberShirt();
         
-        
-        for(i=0;i<escalation.escalationOficialName.length;i++){
-            
-            while(!(escalation.escalationOficialName[i].equalsIgnoreCase("null"))){
-                System.out.printf(" %s ",escalation.name);
+        if(escalationName.size() > 0 && escalationNumber.size() > 0){
+            for(int i=0;i<escalationName.size();i++){
+                escalationName = escalation.getEscalationOficialName();
+                escalationNumber = escalation.getEscalationOficialNumberShirt();
+
+                System.out.printf(" %s ",escalationName.get(i));
                 System.out.printf(" ");
-                System.out.printf(" %s - %d", escalation.escalationOficialName[i],escalation.escalationOficialNumberShirt[i]);
-                
+                System.out.printf(" %s - %d", escalationName.get(i), escalationNumber.get(i));
+
             }
-            
         }
-        
     }
     
 }
