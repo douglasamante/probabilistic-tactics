@@ -1,23 +1,25 @@
 package br.inatel.EC205.model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author amantedouglas
  */
 public class GeneratePatterns { 
     
-    Players [] player = new Players[39];
+    ArrayList<Players> players = new ArrayList<Players>();
     Escalation escalation;
     
-    public void setPlayer(Players player[]){
-        this.player = player;
+    public void setPlayer(ArrayList<Players> player){
+        this.players = player;
     }
     
     public void setEscalation(Escalation escalation){
         this.escalation = escalation;
     }
     
-    public void Choose(int GK, int DC, int RB, int LB, int CDM, int CAM, int RW, int LW, int ST){
+    public void choose(int GK, int DC, int RB, int LB, int CDM, int CAM, int RW, int LW, int ST){
         
         int numberGK = GK;
         int numberDC = DC;
@@ -78,169 +80,174 @@ public class GeneratePatterns {
         int chosenShirtNumberST2 = 0;
         
         
-        for (i = 0; i < player.length; i++) {
-            
-            if(player[i].getPosition().equalsIgnoreCase("GK")){
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getPositioning()+player[i].getImpulse()+player[i].getForce());
+        for (Players player : players) {
+            if(player.getPosition().equalsIgnoreCase("GK")){
+                
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getPositioning()+player.getImpulse()+player.getForce());
+                System.out.println("Nome: " + player.getName());
+                
+                System.out.println("Height: " + player.getHeight());
+                System.out.println("Weight: " + player.getWeight());
+                
+                System.out.println("Sum: " + biggerGK + " > biggerGK: " + biggerGK);
+                System.out.println("IMC: " + IMC);
+                
                 if((IMC>=18.5)&&(IMC<=34.99)){
-                    if(sum>biggerGK){
+                    if(sum>=biggerGK){
                         biggerGK = sum;
-                        chosenNameGK = player[i].getName(); 
-                        chosenShitNumberGK = player[i].getShirtNumber();
+                        chosenNameGK = player.getName(); 
+                        chosenShitNumberGK = player.getShirtNumber();
                     }
                 }   
             }
             
             
-            if(player[i].getPosition().equalsIgnoreCase("DC")){
+            if(player.getPosition().equalsIgnoreCase("DC")){
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getForce()+player[i].getBreath()+player[i].getImpulse()+player[i].getOverviewMarking()+player[i].getOverviewDisarm()+player[i].getPositioning());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getForce()+player.getBreath()+player.getImpulse()+player.getOverviewMarking()+player.getOverviewDisarm()+player.getPositioning());
                 if((IMC>=18.5)&&(IMC<=36.99)){
-                    if(sum>biggerDC1){
+                    if(sum>=biggerDC1){
                         biggerDC1 = sum;
-                        chosenNameDC1 = player[i].getName();
-                        chosenShirtNumberDC1 = player[i].getShirtNumber();
+                        chosenNameDC1 = player.getName();
+                        chosenShirtNumberDC1 = player.getShirtNumber();
                     }
-                    else if(sum>biggerDC2){
+                    else if(sum>=biggerDC2){
                         biggerDC2 = sum;
-                        chosenNameDC2 = player[i].getName();
-                        chosenShirtNumberDC2 = player[i].getShirtNumber();
+                        chosenNameDC2 = player.getName();
+                        chosenShirtNumberDC2 = player.getShirtNumber();
                     }
-                    else if(sum>biggerDC3){
+                    else if(sum>=biggerDC3){
                         biggerDC3 = sum;
-                        chosenNameDC3 = player[i].getName();
-                        chosenShirtNumberDC3 = player[i].getShirtNumber();
+                        chosenNameDC3 = player.getName();
+                        chosenShirtNumberDC3 = player.getShirtNumber();
                     }
                 }
                 
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("RB")){
+            if(player.getPosition().equalsIgnoreCase("RB")){
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getBreath()+player[i].getOverviewMarking()+player[i].getOverviewDisarm()+player[i].getOverviewCrossing()+player[i].getPositioning());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getBreath()+player.getOverviewMarking()+player.getOverviewDisarm()+player.getOverviewCrossing()+player.getPositioning());
                 if((IMC>=18.5)&&(IMC<=33.99)){
-                    if(sum>biggerRB){
+                    if(sum>=biggerRB){
                         biggerRB = sum;
-                        chosenNameRB = player[i].getName();
-                        chosenShirtNumberRB = player[i].getShirtNumber();
+                        chosenNameRB = player.getName();
+                        chosenShirtNumberRB = player.getShirtNumber();
                     }
                 }
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("LB")){
+            if(player.getPosition().equalsIgnoreCase("LB")){
                 
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getBreath()+player[i].getOverviewMarking()+player[i].getOverviewDisarm()+player[i].getOverviewCrossing()+player[i].getPositioning());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getBreath()+player.getOverviewMarking()+player.getOverviewDisarm()+player.getOverviewCrossing()+player.getPositioning());
                 if((IMC>=18.5)&&(IMC<33.99)){
-                    if(sum>biggerLB){
+                    if(sum>=biggerLB){
                         biggerLB = sum;
-                        chosenNameLB = player[i].getName();
-                        chosenShirtNumberLB = player[i].getShirtNumber();
+                        chosenNameLB = player.getName();
+                        chosenShirtNumberLB = player.getShirtNumber();
                     }
                 }
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("CDM")){
+            if(player.getPosition().equalsIgnoreCase("CDM")){
                 
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getOverviewPass()+player[i].getForce()+player[i].getBreath()+player[i].getImpulse()+player[i].getOverviewDisarm()+player[i].getOverviewMarking());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getOverviewPass()+player.getForce()+player.getBreath()+player.getImpulse()+player.getOverviewDisarm()+player.getOverviewMarking());
                 if((IMC>=18.5)&&(IMC<=36.99)){
-                    if(sum>biggerCDM1){
+                    if(sum>=biggerCDM1){
                         biggerCDM1 = sum;
-                        chosenNameCDM1 = player[i].getName();
-                        chosenShirtNumberCDM1 = player[i].getShirtNumber();
+                        chosenNameCDM1 = player.getName();
+                        chosenShirtNumberCDM1 = player.getShirtNumber();
                     }
-                    else if(sum>biggerCDM2){
+                    else if(sum>=biggerCDM2){
                         biggerCDM2=sum;
-                        chosenNameCDM2 = player[i].getName();
-                        chosenShirtNumberCDM2 = player[i].getShirtNumber();
+                        chosenNameCDM2 = player.getName();
+                        chosenShirtNumberCDM2 = player.getShirtNumber();
                     }
-                    else if(sum>biggerCDM3){
+                    else if(sum>=biggerCDM3){
                         biggerCDM3=sum;
-                        chosenNameCDM3  = player[i].getName();
-                        chosenShirtNumberCDM3 = player[i].getShirtNumber();
+                        chosenNameCDM3  = player.getName();
+                        chosenShirtNumberCDM3 = player.getShirtNumber();
                     }
                 }
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("CAM")){
+            if(player.getPosition().equalsIgnoreCase("CAM")){
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getLeader()+player[i].getOverviewDribbler()+player[i].getOverviewFinalization()+player[i].getOverviewCrossing()+player[i].getOverviewPass());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getLeader()+player.getOverviewDribbler()+player.getOverviewFinalization()+player.getOverviewCrossing()+player.getOverviewPass());
                 if((IMC>=18.5)&&(IMC<=34.99)){
-                    if(sum>biggerCAM1){
+                    if(sum>=biggerCAM1){
                         biggerCAM1 = sum;
-                        chosenNameCAM1 = player[i].getName();
-                        chosenShirtNumberCAM1 = player[i].getShirtNumber();
+                        chosenNameCAM1 = player.getName();
+                        chosenShirtNumberCAM1 = player.getShirtNumber();
                     }
-                    else if(sum>biggerCAM2){
+                    else if(sum>=biggerCAM2){
                         biggerCAM2 = sum;
-                        chosenNameCAM2 = player[i].getName();
-                        chosenShirtNumberCAM2 = player[i].getShirtNumber();
+                        chosenNameCAM2 = player.getName();
+                        chosenShirtNumberCAM2 = player.getShirtNumber();
                     }
                 }
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("LW")){
+            if(player.getPosition().equalsIgnoreCase("LW")){
                 
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getOverviewDribbler()+ player[i].getOverviewDisarm()+player[i].getOverviewPass()+player[i].getOverviewCrossing());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getOverviewDribbler()+ player.getOverviewDisarm()+player.getOverviewPass()+player.getOverviewCrossing());
                 if((IMC>=16.5)&&(IMC<=29)){
-                    if(sum>biggerLW){
+                    if(sum>=biggerLW){
                         biggerLW = sum;
-                        chosenNameLW = player[i].getName();
-                        chosenShirtNumberLW = player[i].getShirtNumber();
+                        chosenNameLW = player.getName();
+                        chosenShirtNumberLW = player.getShirtNumber();
                     }
                 }
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("RW")){
+            if(player.getPosition().equalsIgnoreCase("RW")){
                 
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getOverviewDribbler()+ player[i].getOverviewDisarm()+player[i].getOverviewPass()+player[i].getOverviewCrossing());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getOverviewDribbler()+ player.getOverviewDisarm()+player.getOverviewPass()+player.getOverviewCrossing());
                 if((IMC>=16.5)&&(IMC<=29)){
-                    if(sum>biggerRW){
+                    if(sum>=biggerRW){
                         biggerRW = sum;
-                        chosenNameRW = player[i].getName();
-                        chosenShirtNumberRW = player[i].getShirtNumber();
+                        chosenNameRW = player.getName();
+                        chosenShirtNumberRW = player.getShirtNumber();
                     
                     }
                 }
             }
             
-            if(player[i].getPosition().equalsIgnoreCase("ST")){
+            if(player.getPosition().equalsIgnoreCase("ST")){
                 
                 sum=0;
-                IMC = ((player[i].getHeight()*player[i].getHeight())/player[i].getWeight());
-                sum = (player[i].getForce()+player[i].getOverviewFinalization()+player[i].getImpulse());
+                IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
+                sum = (player.getForce()+player.getOverviewFinalization()+player.getImpulse());
                 if((IMC>=18.5)&&(IMC<=36.99)){
-                    if(sum>biggerST1){
+                    if(sum>=biggerST1){
                         biggerST1 = sum;
-                        chosenNameST1 = player[i].getName();
-                        chosenShirtNumberST1 = player[i].getShirtNumber();
+                        chosenNameST1 = player.getName();
+                        chosenShirtNumberST1 = player.getShirtNumber();
                     
                     }
-                    else if(sum>biggerST2){
+                    else if(sum>=biggerST2){
                         biggerST2 = sum;
-                        chosenNameST2 = player[i].getName();
-                        chosenShirtNumberST2 = player[i].getShirtNumber();
+                        chosenNameST2 = player.getName();
+                        chosenShirtNumberST2 = player.getShirtNumber();
                     
                     }
                 }
             }
-        }
-        
+        }       
         
         if((GK==1)&&(DC==2)&&(RB==1)&&(LB==1)&&(CDM==2)&&(CAM==2)&&(ST==2)){ //4-4-2
-            
-            
             
             escalation.bestChoicePlayer(chosenNameGK);
             escalation.bestChoicePlayer(chosenNameDC1);
