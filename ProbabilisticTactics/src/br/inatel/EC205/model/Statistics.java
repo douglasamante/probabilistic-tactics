@@ -12,21 +12,21 @@ public class Statistics{
 
     Scanner valueT = new Scanner(System.in);
     
-    public String[]  games = new String[20];
+    public ArrayList<String> games = new ArrayList<String>();
     private int  yellowCard;
     private int  redCard;
-    public Escalation escalation;
-    public ArrayList<String> escalationName = new ArrayList<>();
-    public ArrayList<Integer> escalationNumber = new ArrayList<>();
-    public Teams [] teams = new Teams[16];
+    public static Escalation escalation;
+    public ArrayList<String> escalationNames = new ArrayList<>();
+    public ArrayList<Integer> escalationNumbers = new ArrayList<>();
+    public static ArrayList<Teams> teams = new ArrayList<Teams>();
     
     public Statistics(){
         escalation = new Escalation();
         
     }
-    
-    public void setTeams(Teams [] teams){
-        this.teams = teams;
+
+    public void setTeams(ArrayList<Teams> teams) {
+        Statistics.teams = teams;
     }
     
     
@@ -48,11 +48,11 @@ public class Statistics{
 
     
     public void setEscalation(Escalation escalation){
-        this.escalation = escalation;
+        Statistics.escalation = escalation;
         
     }
 
-    public void addGame(){
+    /*public void addGame(){
         
             
         //The person choose a team for play of game of back with our team
@@ -83,29 +83,21 @@ public class Statistics{
         }
         
         
-        escalation.SelectionTactic(team1, this.teams);
-         
+        escalation.SelectionTactic(team1, this.teams); //(Time selecionado, array de times)
         
+        escalationNames = escalation.getEscalationOficialName();
+        escalationNumbers = escalation.getEscalationOficialNumberShirt();
         
-        
-        System.out.println("PREPARANDO PARA O JOGO : "); //RETIRAR
-        
-        System.out.println("TIME FORMADO "); //RETIRAR
-        
-        escalationName = escalation.getEscalationOficialName();
-        escalationNumber = escalation.getEscalationOficialNumberShirt();
-        
-        if(escalationName.size() > 0 && escalationNumber.size() > 0){
-            for(int i=0;i<escalationName.size();i++){
-                escalationName = escalation.getEscalationOficialName();
-                escalationNumber = escalation.getEscalationOficialNumberShirt();
+        if(!escalationNames.isEmpty() && !escalationNumbers.isEmpty()){
+            for(String escalationName : escalationNames){
+                int i = 0;
 
-                System.out.printf(" %s ",escalationName.get(i));
+                System.out.printf(" %s ",escalationName);
                 System.out.printf(" ");
-                System.out.printf(" %s - %d", escalationName.get(i), escalationNumber.get(i));
-
+                System.out.printf(" %s - %d", escalationName, escalationNumbers.get(i));
+                i++;
             }
         }
-    }
+    }*/
     
 }

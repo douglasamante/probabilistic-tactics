@@ -7,7 +7,18 @@ package br.inatel.EC205.model;
     public class Players{
     
     private String name;
-    private String position;//[GK,CB,RB,LB,CDM,CAM,RW,LW,ST
+    private String position;
+    /*
+    GK - Goleiro,
+    CB - Zagueiro,
+    RB - Lateral Esquerdo,
+    LB - Lateral direito,
+    CDM - Meiocampista Central,
+    CAM - Meia Atacante,
+    RW - Ala Direita,
+    LW - Ala esquerda,
+    ST - Atacante Principal
+    */
     private String nationality;
     private int age;
     private int shirtNumber;
@@ -25,10 +36,16 @@ package br.inatel.EC205.model;
     private double overviewCrossing; //Points for crossing [0-100]
     private double overviewPass; //Points for pass [0-100]
     private double positioning; //Positioning during the math
-    public Statistics statistics;
+    private int  yellowCard;
+    private int  redCard;
     
-    public void register(String Name, String Position, String Nationality,double Weight,double Leader, double OverviewDribbler, double Height,double Force, double Breath, double Impulse, int Age, double Potential, double OverviewMarking, double OverviewDisarm, double OverviewFinalization, double OverviewCrossing, double OverviewPass, double Positioning,int ShirtNumber){
+    public Players(){
         
+    }
+    
+    public Players(String Name, String Position, String Nationality,double Weight,double Leader, double OverviewDribbler, double Height,double Force, double Breath, double Impulse, int Age, double Potential, double OverviewMarking, double OverviewDisarm, double OverviewFinalization, double OverviewCrossing, double OverviewPass, double Positioning,int ShirtNumber){
+        
+//        this.statistics = new Statistics();
         this.name = Name;
         this.position = Position;
         this.nationality = Nationality;
@@ -49,7 +66,7 @@ package br.inatel.EC205.model;
         this.positioning = Positioning;                
         this.shirtNumber = ShirtNumber;        
     }
-
+    
     public String getName() {
         return name;
     }
@@ -202,20 +219,21 @@ package br.inatel.EC205.model;
         this.positioning = positioning;
     }
 
-    public Statistics getStatistics() {
-        return statistics;
+    public int getYellowCard() {
+        return yellowCard;
     }
 
-    public void setStatistics(Statistics statistics) {
-        this.statistics = statistics;
+    public void setYellowCard(int yellowCard) {
+        this.yellowCard = yellowCard;
+    }
+
+    public int getRedCard() {
+        return redCard;
+    }
+
+    public void setRedCard(int redCard) {
+        this.redCard = redCard;
     }
     
-    public void turnOff(String name, int shirtNumber){
-        
-    }
-    
-    public void edit(String name, int ShirtNumber){
-        
-    }
     
 }

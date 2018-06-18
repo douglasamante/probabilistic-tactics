@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class GeneratePatterns { 
     
-    ArrayList<Players> players = new ArrayList<Players>();
+    public static ArrayList<Players> players = new ArrayList<Players>();
     Escalation escalation;
     
     public void setPlayer(ArrayList<Players> player){
@@ -85,13 +85,6 @@ public class GeneratePatterns {
                 
                 IMC = (player.getWeight()/(player.getHeight()*player.getHeight()));
                 sum = (player.getPositioning()+player.getImpulse()+player.getForce());
-                System.out.println("Nome: " + player.getName());
-                
-                System.out.println("Height: " + player.getHeight());
-                System.out.println("Weight: " + player.getWeight());
-                
-                System.out.println("Sum: " + biggerGK + " > biggerGK: " + biggerGK);
-                System.out.println("IMC: " + IMC);
                 
                 if((IMC>=18.5)&&(IMC<=34.99)){
                     if(sum>=biggerGK){
