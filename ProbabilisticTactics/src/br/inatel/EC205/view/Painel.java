@@ -5,6 +5,37 @@
  */
 package br.inatel.EC205.view;
 
+import br.inatel.EC205.model.Auth;
+import br.inatel.EC205.model.Escalation;
+import br.inatel.EC205.model.GeneratePatterns;
+import br.inatel.EC205.model.Players;
+import br.inatel.EC205.model.Statistics;
+import br.inatel.EC205.model.Teams;
+import br.inatel.EC205.model.Users;
+import java.awt.BorderLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import javax.swing.BoxLayout;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.RowSorter;
+import javax.swing.SortOrder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
+
 /**
  *
  * @author joaop
@@ -14,8 +45,17 @@ public class Painel extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    public Painel() {
+    
+    private TableModel tmPartida, tmJogador;
+    Users user = Auth.getActiveUser();
+    
+    public Painel() {   
         initComponents();
+        jPanelPartidas.setVisible(false);
+        jPanelEstatisticas.setVisible(false);
+        jPanelPartidas.setVisible(false);
+        jPanelJogadores.setVisible(false);
+
     }
 
     /**
@@ -27,31 +67,285 @@ public class Painel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanelInicio = new javax.swing.JPanel();
+        jButtonJogadores = new javax.swing.JButton();
+        jButtonEstatisticas = new javax.swing.JButton();
+        jButtonPartidas = new javax.swing.JButton();
+        jPanelPartidas = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTablePartidas = new javax.swing.JTable();
+        jPanelJogadores = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableJogadores = new javax.swing.JTable();
+        jPanelEstatisticas = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelEstatistica1 = new javax.swing.JPanel();
+        jPanelEstatistica2 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuInicio = new javax.swing.JMenu();
+        jMenuPartidas = new javax.swing.JMenu();
+        jMenuJogadores = new javax.swing.JMenu();
+        jMenuEstatisticas = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login - Painel do Usuário");
+        setTitle("Início - Painel do Usuário");
         setBackground(new java.awt.Color(0, 153, 153));
+        setPreferredSize(new java.awt.Dimension(1080, 960));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 600));
+        jPanelInicio.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelInicio.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Início", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanelInicio.setMaximumSize(new java.awt.Dimension(1017, 960));
+        jPanelInicio.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelInicioComponentShown(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 360, Short.MAX_VALUE)
+        jButtonJogadores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonJogadores.setText("Jogadores");
+        jButtonJogadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonJogadoresMouseClicked(evt);
+            }
+        });
+
+        jButtonEstatisticas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonEstatisticas.setText("Estatísticas");
+        jButtonEstatisticas.setToolTipText("");
+        jButtonEstatisticas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonEstatisticasMouseClicked(evt);
+            }
+        });
+
+        jButtonPartidas.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButtonPartidas.setText("Partidas");
+        jButtonPartidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButtonPartidasMouseClicked(evt);
+            }
+        });
+        jButtonPartidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPartidasActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelInicioLayout = new javax.swing.GroupLayout(jPanelInicio);
+        jPanelInicio.setLayout(jPanelInicioLayout);
+        jPanelInicioLayout.setHorizontalGroup(
+            jPanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInicioLayout.createSequentialGroup()
+                .addGap(319, 319, 319)
+                .addGroup(jPanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonJogadores, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonEstatisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(348, Short.MAX_VALUE))
+            .addGroup(jPanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelInicioLayout.createSequentialGroup()
+                    .addGap(320, 320, 320)
+                    .addComponent(jButtonPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(347, Short.MAX_VALUE)))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 238, Short.MAX_VALUE)
+        jPanelInicioLayout.setVerticalGroup(
+            jPanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInicioLayout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(jButtonJogadores, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonEstatisticas, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(370, Short.MAX_VALUE))
+            .addGroup(jPanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelInicioLayout.createSequentialGroup()
+                    .addGap(117, 117, 117)
+                    .addComponent(jButtonPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(639, Short.MAX_VALUE)))
+        );
+
+        jPanelPartidas.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelPartidas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Partidas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanelPartidas.setMaximumSize(new java.awt.Dimension(1017, 960));
+        jPanelPartidas.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelPartidasComponentShown(evt);
+            }
+        });
+
+        jTablePartidas.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTablePartidas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Time Adversário", "Gols Marcados", "Gols Levados", "Cartões Amarelos", "Cartões Vermelhos", "Vitórias", "Derrotas", "Empates"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTablePartidas);
+
+        javax.swing.GroupLayout jPanelPartidasLayout = new javax.swing.GroupLayout(jPanelPartidas);
+        jPanelPartidas.setLayout(jPanelPartidasLayout);
+        jPanelPartidasLayout.setHorizontalGroup(
+            jPanelPartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
+        );
+        jPanelPartidasLayout.setVerticalGroup(
+            jPanelPartidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
+        );
+
+        jPanelJogadores.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelJogadores.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Jogadores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanelJogadores.setMaximumSize(new java.awt.Dimension(1017, 960));
+        jPanelJogadores.setName(""); // NOI18N
+        jPanelJogadores.setPreferredSize(new java.awt.Dimension(1017, 960));
+        jPanelJogadores.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelJogadoresComponentShown(evt);
+            }
+        });
+
+        jTableJogadores.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jTableJogadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nome", "Camisa", "Posição", "Nacionalidade", "Idade", "Altura", "Peso", "Força", "Respiração", "Impulso", "Potencial", "Desarmação", "Marcação", "Finalização", "Cruzamento", "Passe", "Posicionamento"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jTableJogadores.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jTableJogadores.setPreferredSize(new java.awt.Dimension(1020, 640));
+        jTableJogadores.setRequestFocusEnabled(false);
+        jScrollPane2.setViewportView(jTableJogadores);
+        jTableJogadores.getAccessibleContext().setAccessibleParent(jPanelJogadores);
+
+        javax.swing.GroupLayout jPanelJogadoresLayout = new javax.swing.GroupLayout(jPanelJogadores);
+        jPanelJogadores.setLayout(jPanelJogadoresLayout);
+        jPanelJogadoresLayout.setHorizontalGroup(
+            jPanelJogadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
+        );
+        jPanelJogadoresLayout.setVerticalGroup(
+            jPanelJogadoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 902, Short.MAX_VALUE)
+        );
+
+        jPanelEstatisticas.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelEstatisticas.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Estatísticas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        jPanelEstatisticas.setPreferredSize(new java.awt.Dimension(1017, 960));
+        jPanelEstatisticas.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPanelEstatisticasComponentShown(evt);
+            }
+        });
+
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        jPanel1.setAutoscrolls(true);
+        jPanel1.setMaximumSize(new java.awt.Dimension(1017, 960));
+
+        jPanelEstatistica1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelEstatistica1.setMaximumSize(new java.awt.Dimension(964, 354));
+
+        javax.swing.GroupLayout jPanelEstatistica1Layout = new javax.swing.GroupLayout(jPanelEstatistica1);
+        jPanelEstatistica1.setLayout(jPanelEstatistica1Layout);
+        jPanelEstatistica1Layout.setHorizontalGroup(
+            jPanelEstatistica1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1046, Short.MAX_VALUE)
+        );
+        jPanelEstatistica1Layout.setVerticalGroup(
+            jPanelEstatistica1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 396, Short.MAX_VALUE)
+        );
+
+        jPanelEstatistica2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanelEstatistica2.setMaximumSize(new java.awt.Dimension(964, 354));
+
+        javax.swing.GroupLayout jPanelEstatistica2Layout = new javax.swing.GroupLayout(jPanelEstatistica2);
+        jPanelEstatistica2.setLayout(jPanelEstatistica2Layout);
+        jPanelEstatistica2Layout.setHorizontalGroup(
+            jPanelEstatistica2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanelEstatistica2Layout.setVerticalGroup(
+            jPanelEstatistica2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 426, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -59,43 +353,64 @@ public class Painel extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(426, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanelEstatistica1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelEstatistica2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 73, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(121, 121, 121)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addComponent(jPanelEstatistica1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jPanelEstatistica2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
-        jMenu1.setText("Partidas");
-        jMenuBar1.add(jMenu1);
+        jScrollPane3.setViewportView(jPanel1);
 
-        jMenu2.setText("Jogadores");
+        javax.swing.GroupLayout jPanelEstatisticasLayout = new javax.swing.GroupLayout(jPanelEstatisticas);
+        jPanelEstatisticas.setLayout(jPanelEstatisticasLayout);
+        jPanelEstatisticasLayout.setHorizontalGroup(
+            jPanelEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
+        );
+        jPanelEstatisticasLayout.setVerticalGroup(
+            jPanelEstatisticasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
+        );
 
-        jMenuItem1.setText("Add Novo Jogador");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+        jMenuInicio.setText("Inicio");
+        jMenuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuInicioMouseClicked(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        jMenuBar1.add(jMenuInicio);
 
-        jMenuItem2.setText("Ver Todos");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+        jMenuPartidas.setText("Partidas");
+        jMenuPartidas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuPartidasMouseClicked(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jMenuBar1.add(jMenuPartidas);
 
-        jMenuBar1.add(jMenu2);
+        jMenuJogadores.setText("Jogadores");
+        jMenuJogadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuJogadoresMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuJogadores);
 
-        jMenu3.setText("Estatísticas");
-        jMenuBar1.add(jMenu3);
+        jMenuEstatisticas.setText("Estatísticas");
+        jMenuEstatisticas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuEstatisticasMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenuEstatisticas);
 
         setJMenuBar(jMenuBar1);
 
@@ -103,28 +418,436 @@ public class Painel extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelJogadores, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelPartidas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelEstatisticas, javax.swing.GroupLayout.DEFAULT_SIZE, 1080, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanelInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanelJogadores, javax.swing.GroupLayout.DEFAULT_SIZE, 928, Short.MAX_VALUE)
+                    .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanelPartidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 31, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jPanelEstatisticas, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
+                    .addGap(0, 30, Short.MAX_VALUE)))
         );
+
+        jPanelPartidas.getAccessibleContext().setAccessibleName("jPanelPartidas");
+        jPanelPartidas.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuPartidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuPartidasMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        jPanelJogadores.setVisible(false);
+        jPanelInicio.setVisible(false);
+        jPanelEstatisticas.setVisible(false);
+        this.setTitle("Partidas - Painel do Usuário");
+        carregaPartidas();
+        jPanelPartidas.setVisible(true);
+    }//GEN-LAST:event_jMenuPartidasMouseClicked
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jPanelJogadoresComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelJogadoresComponentShown
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        this.setTitle("Jogadores - Painel do Usuário");
+        if(jPanelJogadores.isShowing())
+            carregaJogadores();        
+    }//GEN-LAST:event_jPanelJogadoresComponentShown
 
+    private void jMenuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuInicioMouseClicked
+        // TODO add your handling code here:
+        jPanelPartidas.setVisible(false);
+        jPanelJogadores.setVisible(false);
+        jPanelEstatisticas.setVisible(false);
+        this.setTitle("Início - Painel do Usuário");
+        
+        jPanelInicio.setVisible(true);
+
+    }//GEN-LAST:event_jMenuInicioMouseClicked
+
+    private void jMenuJogadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuJogadoresMouseClicked
+        // TODO add your handling code here:
+        this.setTitle("Jogadores - Painel do Usuário");
+        jPanelPartidas.setVisible(false);
+        jPanelInicio.setVisible(false);
+        jPanelEstatisticas.setVisible(false);
+        carregaJogadores();
+        jPanelJogadores.setVisible(true);
+    }//GEN-LAST:event_jMenuJogadoresMouseClicked
+
+    private void jPanelPartidasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelPartidasComponentShown
+        // TODO add your handling code here:
+        this.setTitle("Partidas - Painel do Usuário");
+        if(jPanelPartidas.isShowing())
+            carregaPartidas();
+    }//GEN-LAST:event_jPanelPartidasComponentShown
+
+    private void jPanelInicioComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelInicioComponentShown
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jPanelInicioComponentShown
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jMenuEstatisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuEstatisticasMouseClicked
+        // TODO add your handling code here:
+        jPanelPartidas.setVisible(false);
+        jPanelJogadores.setVisible(false);
+        jPanelInicio.setVisible(false);
+        
+        this.setTitle("Estatísticas - Painel do Usuário");
+
+        jPanelEstatisticas.setVisible(true);
+        graficoPartidas();
+        graficoJogadores();
+    }//GEN-LAST:event_jMenuEstatisticasMouseClicked
+
+    private void jPanelEstatisticasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanelEstatisticasComponentShown
+        graficoPartidas();
+        graficoJogadores();
+    }//GEN-LAST:event_jPanelEstatisticasComponentShown
+
+    private void jButtonPartidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPartidasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonPartidasActionPerformed
+
+    private void jButtonPartidasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonPartidasMouseClicked
+        // TODO add your handling code here:
+        jPanelJogadores.setVisible(false);
+        jPanelInicio.setVisible(false);
+        jPanelEstatisticas.setVisible(false);
+        this.setTitle("Partidas - Painel do Usuário");
+        carregaPartidas();
+        jPanelPartidas.setVisible(true);
+    }//GEN-LAST:event_jButtonPartidasMouseClicked
+
+    private void jButtonJogadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonJogadoresMouseClicked
+        // TODO add your handling code here:
+        this.setTitle("Jogadores - Painel do Usuário");
+        jPanelPartidas.setVisible(false);
+        jPanelInicio.setVisible(false);
+        jPanelEstatisticas.setVisible(false);
+        carregaJogadores();
+        jPanelJogadores.setVisible(true);
+    }//GEN-LAST:event_jButtonJogadoresMouseClicked
+
+    private void jButtonEstatisticasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButtonEstatisticasMouseClicked
+        // TODO add your handling code here:
+        jPanelPartidas.setVisible(false);
+        jPanelJogadores.setVisible(false);
+        jPanelInicio.setVisible(false);
+        
+        this.setTitle("Estatísticas - Painel do Usuário");
+
+        jPanelEstatisticas.setVisible(true);
+        graficoPartidas();
+        graficoJogadores();
+    }//GEN-LAST:event_jButtonEstatisticasMouseClicked
+    
+    private CategoryDataset createDatasetPartidas( ) {
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();  
+
+        ArrayList<Teams> teams = Statistics.teams;
+        
+        Collections.sort (teams, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                Teams p1 = (Teams) o1;
+                Teams p2 = (Teams) o2;
+                return p1.getDefealts() < p2.getDefealts() ? -1 : (p1.getDefealts() > p2.getDefealts() ? +1 : 0);
+            }
+        });
+        
+        int i = 0;
+        for(Teams team : teams){
+            dataset.addValue( team.getDefealts() , team.getName(), "Derrotas" );
+            dataset.addValue( team.getVictories(), team.getName(), "Vitórias" );
+            //dataset.addValue( team.getDraws() , team.getName(), "Empates" );
+            dataset.addValue( team.getGoalsScored() , team.getName(), "Gols Marcados" );
+            dataset.addValue( team.getGoalsConceded() , team.getName(), "Gols Recebidos" );
+            i++;
+            if(i==5)
+                break;
+        }            
+
+      return dataset; 
+   }
+    
+    private void graficoPartidas(){
+        // Generate the graph
+       JFreeChart barChart = ChartFactory.createBarChart(
+         "Gráfico das Partidas",           
+         "Time",            
+         "Quantidade",            
+         createDatasetPartidas(),          
+         PlotOrientation.VERTICAL,           
+         true, true, false);
+       
+        ChartPanel CP = new ChartPanel(barChart);
+        
+        CP.setMaximumDrawHeight(400);
+        CP.setMaximumDrawWidth(900);
+        
+        jPanelEstatistica1.setLayout(new java.awt.BorderLayout());        
+        jPanelEstatistica1.add(CP,BorderLayout.CENTER);
+        jPanelEstatistica1.validate();
+       
+    }
+    
+    private void carregaPartidas(){
+        //Tabela de Partidas
+        
+        jTablePartidas.setDefaultEditor(Object.class, null);
+        DefaultTableModel model = (DefaultTableModel) this.jTablePartidas.getModel();
+        model.setRowCount(0);
+        
+        tmPartida = jTablePartidas.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tmPartida);
+        jTablePartidas.setRowSorter(sorter);
+        
+        model.setRowCount(Statistics.teams.size());
+        
+        int i = 0;
+        
+        for (Teams team : Statistics.teams) {
+            if (team != null) {
+                String name = team.getName();
+                int goalsScored = team.getGoalsScored();
+                int goalsConceded = team.getGoalsConceded();
+                int totalYellowCards = team.getTotalYellowCards();
+                int totalRedCards = team.getTotalRedCards();
+                int victories = team.getVictories();
+                int defealts = team.getDefealts();
+                int draws = team.getDraws();
+
+                tmPartida.setValueAt(name, i, 0);
+                tmPartida.setValueAt(goalsScored, i, 1);
+                tmPartida.setValueAt(goalsConceded, i, 2);
+                tmPartida.setValueAt(totalYellowCards, i, 3);
+                tmPartida.setValueAt(totalRedCards, i, 4);
+                tmPartida.setValueAt(victories, i, 5);
+                tmPartida.setValueAt(defealts, i, 6);
+                tmPartida.setValueAt(draws, i, 7);
+                i++;
+            }
+        }
+        
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        //sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+
+        //Ordana pela primeira coluna (Time Adversario)
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+
+        //Ordana pela 2º
+        sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
+
+        //Ordana pela 3º
+        sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+
+        //Ordana pela 4º
+        sortKeys.add(new RowSorter.SortKey(3, SortOrder.ASCENDING));
+
+        //Ordana pela 5º
+        sortKeys.add(new RowSorter.SortKey(4, SortOrder.ASCENDING));
+
+        //Ordana pela 6º
+        sortKeys.add(new RowSorter.SortKey(5, SortOrder.ASCENDING));
+
+        //Ordana pela 7º
+        sortKeys.add(new RowSorter.SortKey(6, SortOrder.ASCENDING));
+
+        //Ordana pela 8º
+        sortKeys.add(new RowSorter.SortKey(7, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+    }
+
+    private CategoryDataset createDatasetJogadores( ) {
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();  
+
+        ArrayList<Players> players = GeneratePatterns.players;
+        
+        Collections.sort (players, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                Players p1 = (Players) o1;
+                Players p2 = (Players) o2;
+                return p1.getForce() < p2.getForce()? -1 : (p1.getOverviewFinalization()> p2.getOverviewFinalization() ? +1 : 0);
+            }
+        });
+        
+        int i = 0;
+        for(Players player : players){
+            dataset.addValue( player.getForce(), player.getName(), "Força" );
+            dataset.addValue( player.getImpulse(), player.getName(), "Impulso" );
+            //dataset.addValue( team.getDraws() , team.getName(), "Empates" );
+            dataset.addValue( player.getOverviewFinalization(), player.getName(), "Finalização" );
+            dataset.addValue( player.getPotential(), player.getName(), "Potencial" );
+            i++;
+            if(i==5)
+                break;
+        }            
+
+      return dataset; 
+   }
+    
+    private void graficoJogadores(){
+        // Generate the graph
+       JFreeChart barChart = ChartFactory.createBarChart(
+         "Gráfico de Jogadores",           
+         "Nome",            
+         "Valor",            
+         createDatasetPartidas(),          
+         PlotOrientation.VERTICAL,           
+         true, true, false);
+       
+        ChartPanel CP = new ChartPanel(barChart);
+        
+        CP.setMaximumDrawHeight(400);
+        CP.setMaximumDrawWidth(900);
+        
+        jPanelEstatistica2.setLayout(new java.awt.BorderLayout());        
+        jPanelEstatistica2.add(CP,BorderLayout.CENTER);
+        jPanelEstatistica2.validate();
+       
+    }
+    
+    private void carregaJogadores(){
+        //Tabela de Partidas
+        
+        jTableJogadores.setDefaultEditor(Object.class, null);
+        DefaultTableModel model = (DefaultTableModel) this.jTableJogadores.getModel();
+        model.setRowCount(0);
+        
+        tmJogador = jTableJogadores.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(tmJogador);
+        jTableJogadores.setRowSorter(sorter);
+        
+        model.setRowCount(GeneratePatterns.players.size()) ;
+        
+        int i = 0;
+        
+        for (Players player : GeneratePatterns.players) {
+            if (player != null) {
+                String name = player.getName();
+                String nationality = player.getNationality();
+                String position = player.getPosition();
+                int age = player.getAge();
+                int shirtNumber = player.getShirtNumber();
+                double weight = player.getWeight(); //Weight each player
+                double height = player.getHeight(); //Height each player
+                double force = player.getForce(); //Force each player
+                double breath = player.getBreath(); //Breath each player
+                double impulse = player.getImpulse(); //Impulse each player
+                double leader = player.getLeader(); 
+                double overviewDribbler = player.getOverviewDribbler(); //Points for dibbler [0-100]
+                double potential = player.getPotential(); //maximize pontetial of player
+                double overviewMarking = player.getOverviewMarking(); //Points for marking[0-100]
+                double overviewDisarm = player.getOverviewDisarm(); //Points for disarm [0-100]
+                double overviewFinalization = player.getOverviewFinalization(); //Points for finalization [0-100]
+                double overviewCrossing = player.getOverviewCrossing(); //Points for crossing [0-100]
+                double overviewPass = player.getOverviewPass(); //Points for pass [0-100]
+                double positioning = player.getPositioning(); //Positioning during the math
+                int  yellowCard = player.getYellowCard();
+                int  redCard = player.getRedCard();
+
+                tmJogador.setValueAt(name, i, 0);
+                tmJogador.setValueAt(shirtNumber, i, 1);
+                tmJogador.setValueAt(position, i, 2);
+                tmJogador.setValueAt(nationality, i, 3);
+                tmJogador.setValueAt(age, i, 4);
+                tmJogador.setValueAt(height, i, 5);
+                tmJogador.setValueAt(weight, i, 6);
+                tmJogador.setValueAt(force, i, 7);
+                tmJogador.setValueAt(breath, i, 8);
+                tmJogador.setValueAt(impulse, i, 9);
+                tmJogador.setValueAt(potential, i, 10);
+                tmJogador.setValueAt(overviewDisarm, i, 11);
+                tmJogador.setValueAt(overviewMarking, i, 12);
+                tmJogador.setValueAt(overviewFinalization, i, 13);
+                tmJogador.setValueAt(overviewPass, i, 14);
+                tmJogador.setValueAt(overviewCrossing, i, 15);
+                tmJogador.setValueAt(positioning, i, 16);
+                i++;
+            }
+        }
+        
+        ArrayList<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        //sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+
+        //Ordana pela primeira coluna (Time Adversario)
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+
+        //Ordana pela 2º
+        sortKeys.add(new RowSorter.SortKey(2, SortOrder.ASCENDING));
+
+        //Ordana pela 3º
+        sortKeys.add(new RowSorter.SortKey(3, SortOrder.ASCENDING));
+
+        //Ordana pela 4º
+        sortKeys.add(new RowSorter.SortKey(4, SortOrder.ASCENDING));
+
+        //Ordana pela 5º
+        sortKeys.add(new RowSorter.SortKey(5, SortOrder.ASCENDING));
+
+        //Ordana pela 6º
+        sortKeys.add(new RowSorter.SortKey(5, SortOrder.ASCENDING));
+
+        //Ordana pela 7º
+        sortKeys.add(new RowSorter.SortKey(6, SortOrder.ASCENDING));
+
+        //Ordana pela 8º
+        sortKeys.add(new RowSorter.SortKey(7, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 9º
+        sortKeys.add(new RowSorter.SortKey(8, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 10º
+        sortKeys.add(new RowSorter.SortKey(9, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 11º
+        sortKeys.add(new RowSorter.SortKey(10, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 12º
+        sortKeys.add(new RowSorter.SortKey(11, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 13º
+        sortKeys.add(new RowSorter.SortKey(12, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 14º
+        sortKeys.add(new RowSorter.SortKey(13, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 15º
+        sortKeys.add(new RowSorter.SortKey(14, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 16º
+        sortKeys.add(new RowSorter.SortKey(15, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
+
+        //Ordana pela 17º
+        sortKeys.add(new RowSorter.SortKey(16, SortOrder.ASCENDING));
+        
+        sorter.setSortKeys(sortKeys);
+    }
     /**
      * @param args the command line arguments
      */
@@ -155,6 +878,7 @@ public class Painel extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Painel().setVisible(true);
             }
@@ -162,13 +886,25 @@ public class Painel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
+    private javax.swing.JButton jButtonEstatisticas;
+    private javax.swing.JButton jButtonJogadores;
+    private javax.swing.JButton jButtonPartidas;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenu jMenuEstatisticas;
+    private javax.swing.JMenu jMenuInicio;
+    private javax.swing.JMenu jMenuJogadores;
+    private javax.swing.JMenu jMenuPartidas;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanelEstatistica1;
+    private javax.swing.JPanel jPanelEstatistica2;
+    private javax.swing.JPanel jPanelEstatisticas;
+    private javax.swing.JPanel jPanelInicio;
+    private javax.swing.JPanel jPanelJogadores;
+    private javax.swing.JPanel jPanelPartidas;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableJogadores;
+    private javax.swing.JTable jTablePartidas;
     // End of variables declaration//GEN-END:variables
 }

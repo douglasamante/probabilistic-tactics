@@ -6,7 +6,7 @@ package br.inatel.EC205.model;
  */
 public class Teams {
     
-    private String names;
+    private String name;
     private int  goalsScored;
     private int  goalsConceded;
     private int  totalYellowCards;
@@ -16,10 +16,13 @@ public class Teams {
     private int  draws;
     private int  balance; //victories - defealts
     
-    public void insertion(String Names, int GoalsScored, int GoalsConceded, int TotalYellowCards, int TotalRedCards, int Victories, int Defealts, int Draws){
-    
+    public Teams(){
         
-        this.names = Names;
+    }
+    
+    public Teams(String name, int GoalsScored, int GoalsConceded, int TotalYellowCards, int TotalRedCards, int Victories, int Defealts, int Draws){
+        
+        this.name = name;
         this.goalsScored = GoalsScored;
         this.goalsConceded = GoalsConceded;
         this.totalRedCards = TotalRedCards;
@@ -30,12 +33,12 @@ public class Teams {
         
     }
 
-    public String getNames() {
-        return names;
+    public String getName() {
+        return name;
     }
 
     public void setNames(String names) {
-        this.names = names;
+        this.name = name;
     }
 
     public int getGoalsScored() {
